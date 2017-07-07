@@ -2,9 +2,19 @@
 
 {% block body %}
 
+    <h2>Liste des annonces existantes</h2>
+
+    {% for annonce in annonceList %}
+        <div class="container-fluid">
+            <h3>{{ annonce.titre }}</h3>
+            <h4>par {{ annonce.vendeur.name }} {{ annonce.vendeur.firstName }}</h4>
+            <p>{{ annonce.description }}</p>
+            <h5>Prix : {{ annonce.price }} €</h5>
+
+            <hr>
+        </div>
+    {% endfor %}
 {% endblock %}
 
-{% block stylesheets %}
 
-{% endblock %}
 

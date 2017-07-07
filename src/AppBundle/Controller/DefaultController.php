@@ -24,7 +24,11 @@ class DefaultController extends Controller
      * @Route("/list", name="list_page")
      */
     public function listAction(){
+
+        $annonceRepo = $this->getDoctrine()->getRepository('AppBundle:Annonce');
+        $annonceList = $annonceRepo->findAll();
+
         return $this->render('list.html.twig',
-            []);
+            ["annonceList" => $annonceList]);
     }
 }
