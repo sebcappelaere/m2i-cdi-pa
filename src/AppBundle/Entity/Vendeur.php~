@@ -165,45 +165,5 @@ class Vendeur
     {
         return $this->password;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->annonces = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add annonce
-     *
-     * @param \AppBundle\Entity\Annonce $annonce
-     *
-     * @return Vendeur
-     */
-    public function addAnnonce(\AppBundle\Entity\Annonce $annonce)
-    {
-        $this->annonces[] = $annonce;
-
-        return $this;
-    }
-
-    /**
-     * Remove annonce
-     *
-     * @param \AppBundle\Entity\Annonce $annonce
-     */
-    public function removeAnnonce(\AppBundle\Entity\Annonce $annonce)
-    {
-        $this->annonces->removeElement($annonce);
-    }
-
-    /**
-     * Get annonces
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAnnonces()
-    {
-        return $this->annonces;
-    }
 }
+

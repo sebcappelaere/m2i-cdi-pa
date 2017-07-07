@@ -162,28 +162,5 @@ class Annonce
     {
         return $this->codePostal;
     }
-
-    /**
-     * Set vendeur
-     *
-     * @param \AppBundle\Entity\Vendeur $vendeur
-     *
-     * @return Annonce
-     */
-    public function setVendeur(\AppBundle\Entity\Vendeur $vendeur = null)
-    {
-        $this->vendeur = $vendeur;
-
-        return $this;
-    }
-
-    /**
-     * Get vendeur
-     *
-     * @return \AppBundle\Entity\Vendeur
-     */
-    public function getVendeur()
-    {
-        return $this->vendeur;
-    }
 }
+
