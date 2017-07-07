@@ -41,7 +41,13 @@
             {% endblock %}
         </header>
         <section class="col-md-8">
-            {% block body %}{% endblock %}
+            {% block body %}
+                <ul>
+                    <li><a href="list.html.twig">Liste des annonces</a></li>
+                    <li><a href="#">Liste des annonces par code postal</a></li>
+                    <li><a href="#">Liste des annonces par prix</a></li>
+                </ul>
+            {% endblock %}
         </section>
         <aside class="col-md-4">
             {% block aside %}{% endblock %}

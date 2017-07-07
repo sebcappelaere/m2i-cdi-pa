@@ -7,6 +7,13 @@ security:
         in_memory:
             memory: ~
 
+    #Encodage des mots de passe
+    encoders:
+      Symfony\Component\Security\Core\User\User: plaintext
+      AppBundle\Entity\Vendeur:
+        algorithm: bcrypt
+
+
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:

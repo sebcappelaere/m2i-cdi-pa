@@ -2,8 +2,10 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Annonce;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -41,7 +43,7 @@ class Vendeur
      * @var string
      * @Assert\Email(message="Cet email n'est pas valide")
      * @Assert\NotBlank(message="Le vendeur doit avoir un email")
-     * @ORM\Column(name="email", type="string", length=30, unique=true)
+     * @ORM\Column(name="email", type="string", length=100, unique=true)
      */
     private $email;
 
@@ -57,7 +59,6 @@ class Vendeur
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Annonce", mappedBy="vendeur")
      */
     private $annonces;
-
 
 
     /**
@@ -165,6 +166,7 @@ class Vendeur
     {
         return $this->password;
     }
+
     /**
      * Constructor
      */
@@ -176,11 +178,11 @@ class Vendeur
     /**
      * Add annonce
      *
-     * @param \AppBundle\Entity\Annonce $annonce
+     * @param Annonce $annonce
      *
      * @return Vendeur
      */
-    public function addAnnonce(\AppBundle\Entity\Annonce $annonce)
+    public function addAnnonce(Annonce $annonce)
     {
         $this->annonces[] = $annonce;
 
@@ -190,9 +192,9 @@ class Vendeur
     /**
      * Remove annonce
      *
-     * @param \AppBundle\Entity\Annonce $annonce
+     * @param Annonce $annonce
      */
-    public function removeAnnonce(\AppBundle\Entity\Annonce $annonce)
+    public function removeAnnonce(Annonce $annonce)
     {
         $this->annonces->removeElement($annonce);
     }
@@ -207,3 +209,5 @@ class Vendeur
         return $this->annonces;
     }
 }
+
+
