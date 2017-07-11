@@ -2,6 +2,10 @@
 
 {% block body %}
 
+    <button class="btn-default" type="button">
+        <a href="{{ path('homepage') }}" style="color: inherit; text-decoration: none; font-size: large">Retour à la page d'accueil</a>
+    </button>
+    
     <h2>Liste des annonces existantes</h2>
 
     {% for annonce in annonceList %}
@@ -16,6 +20,7 @@
         </div>
         {% else %}<h3>Aucune annonce trouvée</h3>
     {% endfor %}
+
 {% endblock %}
 
 
