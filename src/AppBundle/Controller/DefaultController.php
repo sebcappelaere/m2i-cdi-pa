@@ -15,7 +15,7 @@ class DefaultController extends Controller
     {
 
         return $this->render('base.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR
         ]);
     }
 
@@ -31,4 +31,31 @@ class DefaultController extends Controller
         return $this->render('list.html.twig',
             ["annonceList" => $annonceList]);
     }
+
+    /**
+     * Page de la liste des annonces par code postal
+     * @Route("/listcp", name="listByCp_page")
+     */
+    public function listByCpAction(Request $request){
+
+        $cp = $_POST ['cp'];
+        if (preg_match('/[0-9]{5}/',$cp)) {
+            $query = $this->getDoctrine()->getRepository('AppBundle:Annonce')
+                ->createQueryBuilder('a')
+                ->select('a')
+                ->where('a.codePostal= :cp')
+                ->getQuery()
+                ->setParameter('cp', $cp);
+            $annonceList = $query->getResult();
+
+            return $this->render('list.html.twig',
+                ["annonceList" => $annonceList]);
+        }
+        else{
+            $this->addFlash('info',"Ce n'est pas un code postal valide");
+            return $this->render('base.html.twig');
+        }
+    }
+
+
 }

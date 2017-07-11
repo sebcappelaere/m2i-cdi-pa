@@ -9,10 +9,12 @@
             <h3>{{ annonce.titre }}</h3>
             <h4>par {{ annonce.vendeur.name }} {{ annonce.vendeur.firstName }}</h4>
             <p>{{ annonce.description }}</p>
-            <h5>Prix : {{ annonce.price }} €</h5>
+            <p>Prix : {{ annonce.price }} €</p>
+            <p>Code postal : {{ annonce.codePostal }}</p>
 
             <hr>
         </div>
+        {% else %}<h3>Aucune annonce trouvée</h3>
     {% endfor %}
 {% endblock %}
 
