@@ -57,5 +57,32 @@ class DefaultController extends Controller
         }
     }
 
+    /**
+     * Page de la liste des annonces par prix
+     * @Route("/listprice", name="listByPrice_page")
+     */
+    public function listByPriceAction(Request $request){
+
+        $prixMini = $_POST ['prixMini'];
+        $prixMaxi = $_POST ['prixMaxi'];
+        if ($prixMaxi > $prixMini){
+            $query = $this->getDoctrine()->getRepository('AppBundle:Annonce')
+                ->createQueryBuilder('a')
+                ->select('a')
+                ->where('a.price >= :prixMini')
+                ->andWhere('a.price <= :prixMaxi')
+                ->getQuery()
+                ->setParameter('prixMini', $prixMini)
+                ->setParameter('prixMaxi', $prixMaxi);
+            $annonceList = $query->getResult();
+
+            return $this->render('list.html.twig',
+                ["annonceList" => $annonceList]);
+        }
+        else{
+            $this->addFlash('info',"Le prix mini doit être inférieur au prix maxi");
+            return $this->render('base.html.twig');
+        }
+    }
 
 }

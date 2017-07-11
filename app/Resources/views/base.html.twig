@@ -50,28 +50,31 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <form method="post" action="{{ path('listByCp_page') }}">
+
                     <div class="input-group">
                         <button class="btn btn-default" type="button">
                             <a href="{{ path('list_page') }}" style="color: inherit; text-decoration: none; font-size: large" >Liste de toutes les annonces</a>
                         </button>
                     </div>
                     <br>
-                    <div class="input-group">
-                        <button class="btn btn-default" type="submit">
-                            <a style="color: inherit; text-decoration: none; font-size: large">Liste des annonces par code postal</a>
-                        </button>
-                        <input type="text" name="cp" placeholder="Code Postal" style="font-size: large">
-                    </div>
+                    <form method="post" action="{{ path('listByCp_page') }}">
+                        <div class="input-group">
+                            <button class="btn btn-default" type="submit">
+                                <a style="color: inherit; text-decoration: none; font-size: large">Liste des annonces par code postal</a>
+                            </button>
+                            <input type="text" name="cp" placeholder="Code Postal" style="font-size: large">
+                        </div>
+                    </form>
                     <br>
-                    <div class="input-group">
-                        <button class="btn btn-default" type="button">
-                            <a style="color: inherit; text-decoration: none; font-size: large">Liste des annonces par prix</a>
-                        </button>
-                            <input type="text" name="prixMini" placeholder="Prix mini" style="font-size: large">
-                            <input type="text" name="prixMaxi" placeholder="Prix maxi" style="font-size: large">
-                    </div>
-                </form>
+                    <form method="post" action="{{ path('listByPrice_page') }}">
+                        <div class="input-group">
+                            <button class="btn btn-default" type="submit">
+                                <a style="color: inherit; text-decoration: none; font-size: large">Liste des annonces par prix</a>
+                            </button>
+                                <input type="text" name="prixMini" placeholder="Prix mini" style="font-size: large">
+                                <input type="text" name="prixMaxi" placeholder="Prix maxi" style="font-size: large">
+                        </div>
+                    </form>
             {% endblock %}
         </section>
         <aside class="col-md-4">
