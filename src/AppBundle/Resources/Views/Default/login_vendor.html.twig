@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h2>Formulaire d'identification</h2>
+    <form method="post" action="{{ path('login_vendor_check') }}">
+        <div class="form-group">
+            <input type="text" name="_username" class="form-control" placeholder="Votre identifiant (email)" value={{ lastUserName }}>
+        </div>
+        <div class="form-group">
+            <input type="password" name="_password" class="form-control" placeholder="Votre mot de passe">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+    </form>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.message }}</div>
+    {% endif %}
+
+{% endblock %}

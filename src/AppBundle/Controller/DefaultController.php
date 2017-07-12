@@ -8,6 +8,7 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DefaultController extends Controller
 {
@@ -91,7 +92,7 @@ class DefaultController extends Controller
     /**
      * @Route("/newVendor", name="newVendor")
      */
-    public function addVendorAction(Request $request){
+    public function addVendorAction(Request $request, UserPasswordEncoderInterface $passwordEncoder){
 
         //Instanciation d'un nouveau vendeur
         $vendor = new Vendeur();
@@ -105,6 +106,9 @@ class DefaultController extends Controller
         //Persistence si le formulaire est soumis et les tests validés
         if ($form->isSubmitted() && $form->isValid()){
             try{
+                $password = $passwordEncoder->encodePassword($vendor, $vendor->getPlainPassword());
+                $vendor->setPassword($password);
+
                 //Persistence de l'entité
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($vendor);

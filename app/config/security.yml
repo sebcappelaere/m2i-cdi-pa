@@ -6,6 +6,10 @@ security:
     providers:
         in_memory:
             memory: ~
+        vendor_provider:
+            entity:
+              class: AppBundle:Vendeur
+              property: email
 
     #Encodage des mots de passe
     encoders:
@@ -20,6 +24,17 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        vendeur:
+          pattern: ^/vendor
+          provider: vendor_provider
+          form_login:
+            login_path: login_vendor
+            check_path: login_vendor_check
+            default_target_path: vendor_index
+          logout:
+            path: logout_vendor
+            target: homepage
+
         main:
             anonymous: ~
             # activate different ways to authenticate
@@ -29,3 +44,4 @@ security:
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
+

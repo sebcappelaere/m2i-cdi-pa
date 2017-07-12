@@ -1,3 +1,9 @@
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
+
+login_vendor_check:
+  path: /vendor/login_vendor_check
+
+logout_vendor:
+  path: /vendor/logout
