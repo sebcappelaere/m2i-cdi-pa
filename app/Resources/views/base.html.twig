@@ -43,14 +43,6 @@
         </header>
         <section class="col-md-8">
             {% block body %}
-                {% if app.session.flashBag.has("info") %}
-                    <div class="alert alert-info">
-                        {% for message in app.session.flashBag.get("info") %}
-                            <li>{{ message }}</li>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
                     <div class="input-group">
                         <button class="btn btn-default" type="button">
                             <a href="{{ path('list_page') }}" style="color: inherit; text-decoration: none; font-size: large" >Liste de toutes les annonces</a>
@@ -78,7 +70,15 @@
             {% endblock %}
         </section>
         <aside class="col-md-4">
-            {% block aside %}{% endblock %}
+            {% block aside %}
+                {% if app.session.flashBag.has("info") %}
+                    <div class="alert alert-info">
+                        {% for message in app.session.flashBag.get("info") %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endblock %}
         </aside>
     </div>
 

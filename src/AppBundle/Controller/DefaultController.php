@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Vendeur;
+use AppBundle\Form\VendeurType;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,6 +86,43 @@ class DefaultController extends Controller
             $this->addFlash('info',"Le prix mini doit être inférieur au prix maxi");
             return $this->render('base.html.twig');
         }
+    }
+
+    /**
+     * @Route("/newVendor", name="newVendor")
+     */
+    public function addVendorAction(Request $request){
+
+        //Instanciation d'un nouveau vendeur
+        $vendor = new Vendeur();
+
+        //Création du formulaire
+        $form = $this->createForm(VendeurType::class, $vendor, ["method" => "post"]);
+
+        //Injection des données postées dans le formulaire
+        $form->handleRequest($request);
+
+        //Persistence si le formulaire est soumis et les tests validés
+        if ($form->isSubmitted() && $form->isValid()){
+            try{
+                //Persistence de l'entité
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($vendor);
+                $em->flush();
+
+                //Ajout d'un message flash
+                $this->addFlash("info", "Votre compte a été créé");
+
+                //Redirection pour vider les données postées
+                return $this->redirectToRoute("newVendor");
+            } catch (UniqueConstraintViolationException $ex){
+                $this->addFlash("info", "Ce compte existe déjà");
+            }
+
+        }
+
+        //Affichage de la vue avec le formulaire
+        return $this->render('newVendor.html.twig', ["vendeurForm" => $form->createView()]);
     }
 
 }
